@@ -1,0 +1,70 @@
+$formbgcolor: #CCCCFF;
+$formbuttoncolor: #5D3FD3;
+$formbuttonbord: 2px solid #CBC3E3;
+
+body{
+  margin: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+}
+.form_container{
+  width: 50%;
+  background-color: $formbgcolor;
+  padding: 8px;
+  font-size: large;
+  font-weight: bold;
+}
+.form_container button{
+  background-color: $formbuttoncolor;
+  border: $formbuttonbord;
+  height: 40px;
+
+}
+.form_container input{
+  height: 40px;
+}
+
+
+
+ /* Style the text container animation */
+ #text-container {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow: hidden;
+  white-space: pre-line;
+  font-size: xx-large;
+}
+
+#typing-text{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.word {
+  display: flex;
+  height:min-content;
+}
+
+#typing-cursor {
+  display: inline-block;
+  vertical-align: baseline;
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  background-color: black; /* Customize cursor color */
+  animation: blinkCursor 0.7s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
