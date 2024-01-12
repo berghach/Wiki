@@ -207,6 +207,7 @@ class wikiDAO {
     }
 }
 
+//code testing
 // $tag=4;
 // $wiki = new wikiDAO();
 // $B = $wiki->getWiki_by_tag($tag);

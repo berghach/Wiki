@@ -5,7 +5,7 @@ CREATE TABLE user(
     fullname varchar(30),
     username varchar(15) UNIQUE,
     e_mail varchar(30) UNIQUE,
-    psw varchar(12),
+    psw varchar(255),
     user_role ENUM('admin','author') DEFAULT 'author',
     CONSTRAINT pk_user_id  PRIMARY KEY(id)
 );

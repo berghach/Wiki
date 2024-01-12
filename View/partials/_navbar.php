@@ -32,7 +32,7 @@
           <a class="dropdown-item" href="#">
             <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="index.php?action=logout">
             <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
         </div>
       </li>
@@ -130,7 +130,7 @@
         </div>
       </li>
       <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/index.php?action=register">
           <i class="mdi mdi-power"></i>
         </a>
       </li>

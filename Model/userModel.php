@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Connection/connection.php");
+require_once("Connection/connection.php");
 
 class User {
     private $ID;
@@ -53,7 +53,8 @@ class userDAO {
         return $results;
     }
     public function getUser_by_username($username){
-        $stmt = $this->DB->query("SELECT * FROM user WHERE username = '$username';");
+        $stmt = $this->DB->prepare("SELECT * FROM user WHERE username = :username;");
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->execute();
         $resultData = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach($resultData as $row){
@@ -84,10 +85,30 @@ class userDAO {
             return false;
         }
     }
+    public function updateUser(User $User){
+        $stmt = $this->DB->prepare("UPDATE user SET fullname = :new_FN, username = :new_UN, e_mail = :new_email, psw = :new_psw WHERE id = :ref");
+        $newFN = $User->getFullname();
+        $newUN = $User->getUsername();
+        $newEM = $User->getEmail();
+        $newPW = $User->getPassword();
+        $ref = $User->getId();
+        $stmt->bindParam(":new_FN", $newFN, PDO::PARAM_STR);
+        $stmt->bindParam(":new_UN", $newUN, PDO::PARAM_STR);
+        $stmt->bindParam(":new_email", $newEM, PDO::PARAM_STR);
+        $stmt->bindParam(":new_psw", $newPW, PDO::PARAM_STR);
+        $stmt->bindParam(":ref", $ref, PDO::PARAM_INT);
+        $stmt->execute();
+        if($stmt->rowcount()!=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
+//code testing
 // $usersData = new userDAO();
-// $A = 'dfghj';
+// $A = 'admin1';
 // $user= $usersData->getUser_by_username($A);
 // if(!empty($user)){
 // echo'<table>
@@ -121,4 +142,14 @@ class userDAO {
 //     echo "this user can not be added";
 // }
 
+
+// $psw = "jhon1234";
+// $hashpsw = password_hash($psw, PASSWORD_BCRYPT);
+// $author = new User(8,"Jhon Legend","jhon1", "jhon1@mail.com", $hashpsw, 0);
+// $user = new userDAO();
+// if($user->updateUser($author)){
+//     echo "user updated seccessfully";
+// }else{
+//     echo "this user can not be updated";
+// }
 ?>
