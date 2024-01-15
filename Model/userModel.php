@@ -67,6 +67,30 @@ class userDAO {
         }
         
     }
+    public function getUser_by_id($id){
+        $stmt = $this->DB->prepare("SELECT * FROM user WHERE id = :ref;");
+        $stmt->bindParam(":ref", $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach($resultData as $row){
+            $result = new User($row["id"], $row["fullname"], $row["username"], $row["e_mail"], $row["psw"], $row["user_role"]);
+        }
+        if(!empty($result)){
+            return $result;
+        }else{
+            return null;
+        }
+    }
+    public function getAuthors(){
+        $stmt = $this->DB->query("SELECT * FROM user WHERE user_role = 'author';");
+        $stmt->execute();
+        $resultData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results=array();
+        foreach($resultData as $row){
+            $results[] = new User($row["id"], $row["fullname"], $row["username"], $row["e_mail"], $row["psw"], $row["user_role"]);
+        }
+        return $results;
+    }
     public function addUser(User $User){
         $stmt = $this->DB->prepare("INSERT INTO user (fullname, username, e_mail, psw)
                                     VALUE (:fullname, :username, :e_mail, :passw);");
@@ -110,7 +134,7 @@ class userDAO {
 // $usersData = new userDAO();
 // $A = 'admin1';
 // $user= $usersData->getUser_by_username($A);
-// if(!empty($user)){
+// if($user != null){
 // echo'<table>
 // <thead>
 //     <tr>ID</tr>
@@ -141,7 +165,6 @@ class userDAO {
 // }else{
 //     echo "this user can not be added";
 // }
-
 
 // $psw = "jhon1234";
 // $hashpsw = password_hash($psw, PASSWORD_BCRYPT);

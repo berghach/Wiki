@@ -1,6 +1,6 @@
 <?php
 
-require_once("../Connection/connection.php");
+require_once("Connection/connection.php");
 
 class Category{
     private $id;

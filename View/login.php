@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+    <title>Login</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -37,13 +37,13 @@
                     ?>
                 <form class="pt-3" action="index.php?action=login" method="post">
                   <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" name="password" id="password" placeholder="Username" required>
+                    <input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="Username" required>
                   </div>
                   <div class="form-group">
                     <input type="password" class="form-control form-control-lg" name="password" id="password" placeholder="Password" required>
                   </div>
                   <div class="mt-3">
-                    <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">SIGN IN</button>
+                    <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">LOG IN</button>
                   </div>
                   <div class="my-2 d-flex justify-content-between align-items-center">
                     <a href="#" class="auth-link text-black">Forgot password?</a>

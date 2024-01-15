@@ -1,35 +1,62 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
-    <li class="nav-item nav-profile">
-      <a href="#" class="nav-link">
-        <div class="nav-profile-image">
-          <img src="assets/images/faces/face1.jpg" alt="profile">
-          <span class="login-status online"></span>
-          <!--change to offline or busy as needed-->
-        </div>
-        <div class="nav-profile-text d-flex flex-column">
-          <span class="font-weight-bold mb-2">David Grey. H</span>
-          <span class="text-secondary text-small">Project Manager</span>
-        </div>
-        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-      </a>
-    </li>
+    <?php
+      if(isset($_SESSION['User_session'])){
+          echo '<li class="nav-item nav-profile">
+                  <a href="#" class="nav-link">
+                    <div class="nav-profile-image">
+                      <img src="assets/images/faces/face1.jpg" alt="profile">
+                      <span class="login-status online"></span>
+                    </div>
+                    <div class="nav-profile-text d-flex flex-column">
+                      <span class="font-weight-bold mb-2">'.$_SESSION['User_session']['fullname'].'</span>
+                      <span class="text-secondary text-small">'.$_SESSION['User_session']['role'].'</span>
+                    </div>
+                    <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="index.php?action=default">
+                    <span class="menu-title">Dashboard</span>
+                    <i class="mdi mdi-home menu-icon"></i>
+                  </a>
+                </li>';
+        }else{
+          echo '<li class="nav-item">
+                  <a class="nav-link" href="index.php?action=default">
+                    <span class="menu-title">Home</span>
+                    <i class="mdi mdi-home menu-icon"></i>
+                  </a>
+                </li>';
+        }
+      ?>
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
-        <span class="menu-title">Dashboard</span>
-        <i class="mdi mdi-home menu-icon"></i>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-        <span class="menu-title">Basic UI Elements</span>
+      <a class="nav-link" data-bs-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
+        <span class="menu-title">Categories</span>
         <i class="menu-arrow"></i>
-        <i class="mdi mdi-crosshairs-gps menu-icon"></i>
       </a>
-      <div class="collapse" id="ui-basic">
+      <div class="collapse" id="category">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+          <?php
+          foreach($categories as $row){
+            echo '<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">'.$row->getName().'</a></li>';
+          }
+          ?>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#tag" aria-expanded="false" aria-controls="tag">
+        <span class="menu-title">Tags</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="tag">
+        <ul class="nav flex-column sub-menu">
+          <?php
+          foreach($tags as $row){
+            echo '<li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">'.$row->getName().'</a></li>';
+          }
+          ?>
         </ul>
       </div>
     </li>
@@ -40,7 +67,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="pages/forms/basic_elements.html">
+      <a class="nav-link" href="index.php?action=forms">
         <span class="menu-title">Forms</span>
         <i class="mdi mdi-format-list-bulleted menu-icon"></i>
       </a>

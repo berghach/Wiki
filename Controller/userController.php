@@ -5,17 +5,19 @@ require_once("Model\userModel.php");
 class UserController{
     function login(){
         // session_start();
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        // if (isset($_POST["username"]) && isset($_POST["password"])) {
             $username = $_POST["username"];
             $password = $_POST["password"];
-
+            // }
             $userDAO = new userDAO();
             $user = $userDAO->getUser_by_username($username);
 
             $userSESSION = array();
-            if(!empty($user)){
+            if($user != null){
                 if($user->getUserrole() == 'admin'){
                     if($user->getPassword() == $password){
+                        $userSESSION['fullname'] = $user->getFullname();
                         $userSESSION['username'] = $user->getUsername();
                         $userSESSION['role'] = $user->getUserrole();
                         $_SESSION['User_session'] = $userSESSION;
@@ -29,6 +31,7 @@ class UserController{
                     }
                 }else{
                     if(password_verify($password, $user->getPassword())){
+                        $userSESSION['fullname'] = $user->getFullname();
                         $userSESSION['username'] = $user->getUsername();
                         $userSESSION['role'] = $user->getUserrole();
                         $_SESSION['User_session'] = $userSESSION;
@@ -50,9 +53,16 @@ class UserController{
         include("View\login.php");
         unset($_SESSION['login_error']);
     }
+    function logout(){
+        // Logout by destroying the session
+        session_destroy();
+        // Redirect to the home page
+        header('Location: index.php?action=default');
+        exit();
+    }
     function register(){
         // session_start();
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        if ($_SERVER["REQUEST_METHOD"] === "POST"){
             $fullname = $_POST["fullname"];
             $username = $_POST["username"];
             $email = $_POST["email"];
@@ -100,10 +110,13 @@ class UserController{
 
             $adduser = new userDAO();
             $adduser->addUser($user);
+            if ($adduser){
+                header("Location: index.php?action=login");
+                exit();
+            }
         }
         include("View/register.php");
         unset($_SESSION['register_errors']);
     }
 }
 
-?>

@@ -84,18 +84,22 @@ class tagDAO{
             return null;
         }
     }
-    public function get_wikiTag($wiki){
+    public function get_wikiTag($wiki_id){
         $stmt = $this->DB->prepare("SELECT tag.* FROM tag LEFT JOIN 
                                     (wiki LEFT JOIN wiki_tag on wiki.id=wiki_tag.wiki_id) 
                                     on tag.id=wiki_tag.tag_id WHERE wiki.id= :ref;");
-        $stmt->bindParam(":ref", $wiki, PDO::PARAM_INT);
+        $stmt->bindParam(":ref", $wiki_id, PDO::PARAM_INT);
         $stmt->execute();
         $resultData = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $results = array();
         foreach($resultData as $row){
             $results[] = new Tag($row["id"], $row["name_tag"], $row["descreption"], $row["creation_date"], $row["edit_date"]);
         }
-        return $results;
+        if(!empty($results)){
+            return $results;
+        }else{
+            return null;
+        }
     }
     public function addTag(Tag $tag){
         $stmt = $this->DB->prepare("INSERT INTO tag (name_tag, descreption)
