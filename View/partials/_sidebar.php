@@ -103,9 +103,9 @@
     <li class="nav-item sidebar-actions">
       <span class="nav-link">
         <div class="border-bottom">
-          <h6 class="font-weight-normal mb-3">Projects</h6>
+          <h6 class="font-weight-normal mb-3">Wikis</h6>
         </div>
-        <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
+        <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a wiki</button>
         <div class="mt-4">
           <div class="border-bottom">
             <p class="text-secondary">Categories</p>

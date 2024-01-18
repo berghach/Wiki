@@ -3,7 +3,7 @@
 require_once("Model\userModel.php");
 
 class UserController{
-    function login(){
+    static function login(){
         // session_start();
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // if (isset($_POST["username"]) && isset($_POST["password"])) {

@@ -14,7 +14,7 @@ switch ($action) {
         $userControl->register();
         break;
     case 'login':
-        $userControl->login();
+        UserController::login();
     break;
     case 'logout':
         $userControl->logout();
